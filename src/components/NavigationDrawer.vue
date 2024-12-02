@@ -10,14 +10,20 @@
       title="Kanji Word Details"
     ></v-list-item>
     <v-list-item link to="kjall" title="Study Kanji"></v-list-item>
-    <v-list-item link to="aboutMe" title="About me"></v-list-item>
+    <v-list-item v-if="isLoggedIn" link to="aboutMe" title="About me"></v-list-item>
   </v-navigation-drawer>
 </template>
 <script>
 import { defineComponent } from "vue";
+import { mapGetters } from "vuex";
 
 export default defineComponent({
   name: "NavigationDrawer",
+
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
+  },
+  watch: {},
 });
 </script>
 <style>

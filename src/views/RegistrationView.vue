@@ -34,6 +34,7 @@ export default defineComponent({
         this.userData.email = data.email;
         this.userData.fullName = data.fullName;
         this.userData.id = data.id;
+
         this.$store.dispatch("saveUser", this.userData);
         this.$router.push({ path: "/userInfo" });
       }

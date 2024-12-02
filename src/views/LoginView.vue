@@ -45,6 +45,8 @@ export default defineComponent({
           this.token = data.token;
           console.log("Token is", this.token);
           localStorage.setItem("token", this.token);
+
+          this.$store.dispatch("saveUser", this.email);
         } else if (resp.status == 403) {
           this.msg = "email and password does not match";
         } else this.$router.push({ path: "/takeExam" });

@@ -75,6 +75,7 @@ async function getAboutme(path) {
 
   try {
     const token = localStorage.getItem("token")
+    console.log(token, "for me")
     const resp = await fetch("http://localhost:8005/users" + path, {
       method: "GET",
       credentials: 'include',
@@ -83,7 +84,7 @@ async function getAboutme(path) {
         ...(token && { Authorization: `Bearer ${token}` }),
       }
     });
-
+    console.log(resp)
 
     return resp;
   } catch (error) {
