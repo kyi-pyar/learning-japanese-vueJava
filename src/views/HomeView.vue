@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- <v-row>
-      <v-col cols="2">
-        <NavigationDrawer></NavigationDrawer>
-      </v-col>
-      <v-col cols="10"><WelcomePage /></v-col>
-    </v-row>-->
     <WelcomePage />
   </div>
 </template>
