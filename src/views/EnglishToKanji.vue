@@ -2,17 +2,28 @@
   <div class="dicForm">
     <h1>Dictionay for English to Kanji</h1>
     <v-text-field label="Enter English Word" v-model="english"></v-text-field>
-
-    <v-btn class="searchBtn" @click="ConvertoEnglish()">Search</v-btn>
+    <div>
+      <v-btn class="searchBtn" @click="ConvertoEnglish()" :disabled="loading">
+        <v-progress-circular v-if="loading" :size="30" :width="3" color="red" indeterminate></v-progress-circular>
+        <span v-else>Search</span>
+      </v-btn>
+    </div>
 
     <div class="engword">English Word: {{ this.english }}</div>
-    <div v-if="found===false" class="kanjicolor">No Match word found</div>
 
+    <div v-if="found===false" class="kanjicolor">No Match word found</div>
     <div class="kanjiword">
       <v-row>
-        <v-col cols="4" v-for="(word,index) in kanji" :key="index">
+        <v-col cols="12" v-for="(word,index) in kanji" :key="index">
           Kanji:
           <span class="kanjicolor">{{ word.kanji.character }}</span>
+          <span>
+            &nbsp; &nbsp; &nbsp; &nbsp;
+            <router-link
+              class="link"
+              :to="{ name: 'KanjiDetail', params: { kanji: word.kanji.character } }"
+            >details</router-link>
+          </span>
           <br />
           stroke:{{ word.kanji.stroke }}
         </v-col>
@@ -30,20 +41,23 @@ export default defineComponent({
     english: "",
     kanji: [],
     found: true,
+    loading: false,
   }),
   created() {
     this.kanji = "";
   },
   methods: {
     async ConvertoEnglish() {
+      this.loading = true;
       const resp = await http.get("kem=" + this.english);
-      console.log(resp);
+
       if (resp) {
         const data = await resp.json();
         if (data) {
           this.kanji = data;
           if (this.kanji.length == 0) this.found = false;
           else this.found = true;
+          this.loading = false;
         } else {
           console.log("error");
         }
@@ -60,7 +74,7 @@ export default defineComponent({
   margin-right: 5%;
 }
 .searchBtn {
-  background-color: rgb(190, 0, 0);
+  background-color: #cc2b52;
   font-family: "Courier New, Courier, monospace";
   font-size: 30px;
   margin-left: 40%;
@@ -76,5 +90,9 @@ export default defineComponent({
 }
 .kanjicolor {
   color: rgb(190, 0, 0);
+}
+.link {
+  font-size: 20px;
+  font-style: italic;
 }
 </style>
