@@ -6,7 +6,7 @@
         
     </v-btn>-->
     <router-link to="/login">
-      <v-icon class="login">mdi-login</v-icon>
+      <v-icon @click="editMemo" icon="fa:fas fa-user"></v-icon>
     </router-link>
   </v-app-bar>
 </template>

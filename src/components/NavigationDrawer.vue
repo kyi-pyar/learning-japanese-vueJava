@@ -13,6 +13,8 @@
     <v-list-item link to="kjall" title="Study Kanji"></v-list-item>
     <v-divider></v-divider>
     <v-list-item v-if="isLoggedIn" link to="aboutMe" title="About me"></v-list-item>
+    <v-list-item v-if="isLoggedIn" link to="saveStudiedKanji" title="Let study with memo"></v-list-item>
+    <v-list-item v-if="isLoggedIn" link to="retrieveStudiedKanji" title="Memorized Kanji"></v-list-item>
   </v-navigation-drawer>
 </template>
 <script>

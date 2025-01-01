@@ -9,6 +9,11 @@ import TakeExamView from '@/views/TakeExamView.vue'
 import RegistrationView from '@/views/RegistrationView.vue'
 import RetrieveUserView from '@/views/RetrieveUserView'
 import RegisterationRequriementView from '@/views/RegisterationRequriementView'
+import StudiedKanji from '@/views/StudiedKanji.vue'
+import RetrieveStudiedKanji from "@/views/RetrieveStudiedKanji.vue"
+import DetailsMemorizedKanji from "@/views/DetailsMemorizedKanji.vue"
+
+
 const routes = [
   {
     path: '/',
@@ -62,6 +67,25 @@ const routes = [
     path: '/userInfo',
     name: 'userInfo',
     component: RegisterationRequriementView
+
+  },
+  {
+    path: '/saveStudiedKanji',
+    name: 'saveStudiedKanji',
+    component: StudiedKanji
+
+  },
+  {
+    path: '/retrieveStudiedKanji',
+    name: 'retrieveStudiedKanji',
+    component: RetrieveStudiedKanji
+
+  },
+  {
+    path: '/detailsMemorizedKanji/:id',
+    name: 'detailsMemorizedKanji',
+    component: DetailsMemorizedKanji,
+    props: true
 
   },
   {

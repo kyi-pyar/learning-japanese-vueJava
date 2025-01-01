@@ -62,8 +62,6 @@ async function loginAuth(path, body) {
 
       body: JSON.stringify(body),
     });
-
-
     return resp;
   } catch (error) {
     console.log(error)
@@ -71,8 +69,67 @@ async function loginAuth(path, body) {
   }
 }
 
-async function getAboutme(path) {
+async function saveMemo(path, body) {
+  try {
+    const resp = await fetch("http://localhost:8005/users" + path, {
+      method: "POST",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+      },
 
+      body: JSON.stringify(body),
+    });
+    return resp;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function getStudiedKanji(path) {
+  try {
+    const resp = await fetch("http://localhost:8005/users" + path, {
+      method: "GET",
+    });
+    return resp;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+async function deleteWord(path) {
+  try {
+    const token = localStorage.getItem("token")
+    const resp = await fetch("http://localhost:8005/users" + path, {
+      method: "DELETE",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+    });
+    return resp;
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
+async function getStudiedKanjiDetils(path) {
+  try {
+    const resp = await fetch("http://localhost:8005/users" + path, {
+      method: "GET",
+    });
+    return resp;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+
+async function getAboutme(path) {
   try {
     const token = localStorage.getItem("token")
     console.log(token, "for me")
@@ -114,6 +171,30 @@ async function save(path, body) {
   }
 }
 
+async function updateMemo(path, body) {
+  const token = localStorage.getItem("token")
+
+  try {
+    const resp = await fetch("http://localhost:8005/users" + path, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: 'include',
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: JSON.stringify(body),
+    });
+
+    console.log(resp)
+
+
+    return resp;
+  } catch (error) {
+    console.log(error)
+
+  }
+}
+
 
 export default {
   get,
@@ -121,6 +202,11 @@ export default {
   authSingup,
   loginAuth,
   getAboutme,
-  save
+  save,
+  saveMemo,
+  getStudiedKanji,
+  deleteWord,
+  getStudiedKanjiDetils,
+  updateMemo
 
 }
