@@ -1,0 +1,32 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container-name
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: learning_japanese
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Mysql_db
+    networks:
+      - app-network
+
+  springboot-app:
+    build:
+      context: .
+    container_name: spring-boot-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container-name:3307/learning_japanese
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Mysql_db    
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
