@@ -62,15 +62,14 @@ export default defineComponent({
         id: this.word.id,
         memo: this.word.memo,
       });
-      if (repo & (repo.status == 200)) {
-        const data = await repo.json;
-        console.log(data);
+      if (repo.status == 200) {
+        this.$router.push({ path: "/retrieveStudiedKanji" });
       } else {
         console.log("sth wrong");
       }
     },
     back() {
-      this.$router.push("/retrieveStudiedKanji");
+      this.$router.push({ path: "/retrieveStudiedKanji" });
     },
   },
 });

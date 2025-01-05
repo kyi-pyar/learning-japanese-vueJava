@@ -1,5 +1,19 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="text-center">
+    <v-menu :location="location">
+      <template v-slot:activator="{ props }">
+        <v-btn color="primary" dark v-bind="props">Dropdown</v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item>AA</v-list-item>
+        <v-list-item>AA</v-list-item>
+      </v-list>
+    </v-menu>
   </div>
 </template>
+<script>
+export default {
+  data: () => ({}),
+};
+</script>

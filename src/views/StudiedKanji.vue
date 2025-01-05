@@ -1,6 +1,6 @@
 <template>
   <v-container class="memoForm">
-    <v-text-field label="Enter Studied Kanji" v-model="kanji"></v-text-field>
+    <v-text-field label="Enter Studied Kanji" v-model="word"></v-text-field>
     <v-textarea label="memo" v-model="memo"></v-textarea>
     <v-btn class="saveBtn" @click="saveMemo()" :disabled="loading">Save</v-btn>
   </v-container>
@@ -21,7 +21,7 @@ export default defineComponent({
     async saveMemo() {
       this.loading = true;
       const resp = await http.saveMemo("/saveMemo", {
-        kanji: this.kanji,
+        kanji: this.word,
         memo: this.memo,
         user: this.$store.getters.getUser,
       });

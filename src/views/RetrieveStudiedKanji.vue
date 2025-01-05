@@ -7,16 +7,12 @@
 
     <div ref="masonryGrid" class="masonry-grid">
       <div v-for="(each,index) in memorizedwords" :key="index">
-        <v-card
-          class="masonry-item"
-          :style="{ backgroundColor: each.color, color: 'brown', height: each.height}"
-        >
+        <v-card class="masonry-item" :style="{ backgroundColor: each.color, color: 'brown', }">
           <v-card-title>{{ each.word }}</v-card-title>
           <v-card-text>{{ truncateText(each.memo,20) }}</v-card-text>
           <v-card-actions class="actions">
             <v-btn @click="detailsKanji(each)">details</v-btn>
-            <!-- <v-icon @click="editMemo" icon="fa:fas fa-user"></v-icon> -->
-            <v-icon @click="deleteWord(each)" icon="fa-solid fa-trash"></v-icon>
+            <v-icon @class="trash" @click="deleteWord(each)" icon="fa-solid fa-trash"></v-icon>
           </v-card-actions>
         </v-card>
       </div>
@@ -63,9 +59,6 @@ export default {
 
       return color;
     },
-    generateHeight() {
-      return Math.floor(Math.random() * 200) + 100 + "px";
-    },
 
     initializeCartColors() {
       this.numberOfCards = this.words.length;
@@ -75,7 +68,6 @@ export default {
         word: w.kanji, // Assign text from the texts array
         memo: w.memo,
         color: this.generateHexColor(), // Generate a random color
-        height: this.generateHeight(), //for ramdom height
       }));
     },
     truncateText(text, limit) {
@@ -119,9 +111,14 @@ export default {
   text-align: center;
   padding: 5px;
   font-size: 25px;
+  height: 100%;
 }
 .actions {
   margin-bottom: 5px;
+}
+.trash {
+  color: "brown";
+  font-size: 20px;
 }
 </style>
   
